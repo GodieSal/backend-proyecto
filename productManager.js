@@ -12,7 +12,7 @@ class ProductManager{
         this.thumbnail = thumbnail ,
         this.code =code ,
         this.stock = stock,
-        ProductManager.id;
+        this.id = ProductManager.id;
      }
    
     
@@ -51,7 +51,7 @@ addProduct(){
 
      getById(id){
         const obtenerproductos = JSON.parse(fs.readFileSync('productos.json', 'utf-8'));
-        obtenerproductos.map((element)=>{ if(element.id == id)
+        obtenerproductos.forEach((element)=>{ if(element.id == id)
             console.log(element)
          })
 
@@ -83,7 +83,7 @@ addProduct(){
     }
     modificarArchivo(id , nuevosDatos){
         
-        getProducts.map((element)=>{
+        getProducts.forEach((element)=>{
             if(element.id == id ){
               element.title = nuevosDatos.title;
               element.description = nuevosDatos.description;
@@ -100,21 +100,15 @@ addProduct(){
         })
     }
 
-        borrarProductos(id){
-            const productoborrar = [];
-            getProducts.map((element)=>{
-                if(element.id !== id){
-                    productoborrar.push(element);
-
-
-                }
-                fs.writeFileSync('productos.json', JSON.stringify(productoborrar));
-            })
+    borrarProductos(id) {
+        const productoborrar = getProducts.filter((element) => element.id !== id);
+        fs.writeFileSync('productos.json', JSON.stringify(productoborrar));
+            }
 
         }
         
      
-    }
+    
 
     
 

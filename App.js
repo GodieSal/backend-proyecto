@@ -1,11 +1,11 @@
 const express = require('express');
 const fs = require('fs');
-const {ProductManager}= require('./productManager');
+const { ProductManager } = require('./productManager');
 
 const app = express();
 const port = 8080;
 
-const Pmanager = new ProductManager;
+const Pmanager = new ProductManager();
 app.get('/products', async (req,res)=>{
 
     const obtenerproductos = await Pmanager.cargarElArchivo();
@@ -34,5 +34,5 @@ app.get('/products/:id', async (req,res)=>{
     res.send(obtenerproductos.find(e =>parseInt(e.id) == parseInt( req.params.id)));
 });
 app.listen(port, ()=>{
-    console.log('servidor levantado en el purto' , port );
+    console.log('servidor levantado en el puerto' , port );
 })
